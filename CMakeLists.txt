@@ -45,6 +45,7 @@ find_package(PkgConfig REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(Python COMPONENTS Interpreter Development)
 
+message(STATUS "Detected Python version: ${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}")
 # Construct Boost Python component name based on Python version
 set(Boost_Python_VERSION "python${Python_VERSION_MAJOR}${Python_VERSION_MINOR}")
 set(Boost_Python_COMPONENT "Boost::${Boost_Python_VERSION}")

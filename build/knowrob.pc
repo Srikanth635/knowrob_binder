@@ -1,0 +1,14 @@
+prefix="/usr/local"
+exec_prefix="${prefix}"
+libdir="${prefix}/lib"
+includedir="${prefix}/include"
+
+Name: knowrob
+Description: A Knowledge Base System for Cognition-enabled Robots
+URL: https://github.com/knowrob/knowrob
+Version: 2.1.0
+Requires: 
+Requires.private: 
+Cflags: -I"${includedir}"
+Libs: -L"${libdir}"  -lswipl -lmongoc-1.0 -lbson-1.0 -lraptor2 -lrdf -l/usr/lib/x86_64-linux-gnu/libpython3.8.so -lspdlog::spdlog -lGTest::gtest
+Libs.private: -L"${libdir}"
