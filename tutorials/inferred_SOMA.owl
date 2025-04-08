@@ -1,0 +1,605 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="file:///tmp/tmpwbr51xhw"
+         xmlns="file:///tmp/tmpwbr51xhw#"
+         xmlns:DUL.="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#">
+
+<owl:Ontology rdf:about="file:///tmp/tmpwbr51xhw"/>
+
+<owl:ObjectProperty rdf:about="#BaseProperty"/>
+
+<owl:ObjectProperty rdf:about="#exerts_force">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_exerted_by">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#resists_force">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_resisted_by">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#occurs_during">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#applied_to">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_part_of">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_part">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_parent_link">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_child_link">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#contains">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#contains_object">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_contained_in">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_preferred_alignment">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_preferred_axis">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_vertical_alignment">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_rotated_gripper">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_rim_grasp">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_physically_contained_in">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#supports">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_supported_by">
+  <rdfs:subPropertyOf rdf:resource="#BaseProperty"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#BaseDatatype"/>
+
+<owl:Class rdf:about="#Base">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PhysicalAttribute">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceAttribute">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FrictionAttribute">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#NetForce">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#StaticFrictionAttribute">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KineticFrictionAttribute">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceMinimalExertion">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceProprioceptionFeedback">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceMinorResistance">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceContactForce">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceResistanceFromObject">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceEquilibriumHold">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceEquilibriumState">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceGravityCompensation">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForcePreloading">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceShearForce">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceCompressiveForce">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceBlockageEvent">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceBreakageEvent">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceModulationDuringCutting">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceLoadReduction">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceEquilibriumReset">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ForceAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceFrictionGrip">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#StaticFrictionAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceFrictionResistance">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#KineticFrictionAttribute"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ForceSeparationEvent">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#NetForce"/>
+</owl:Class>
+
+<owl:Class rdf:about="#World">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Floor">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Milk">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Robot">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Cereal">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Kitchen">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PouringTool">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Food">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Apartment">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Cup">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Spoon">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Bowl">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PreferredGraspAlignment">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#XAxis">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#YAxis">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#NoAlignment">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Truthy">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Falsy">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Cabinet">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Washer">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Drawer">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Refrigerator">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Sink">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Door">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Cutting">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Grasping">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Pouring">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Handle">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Link">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PhysicalObject">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Agent">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Human">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Room">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Location">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Container">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Joint">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ContinuousJoint">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HingeJoint">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FixedJoint">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MovableJoint">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FloatingJoint">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PlanarJoint">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PrismaticJoint">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#RevoluteJoint">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DesignedFurniture">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Surface">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PhysicalTask">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Action">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Event">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Entity">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Task">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#RootLink">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Supporter">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SupportedObject">
+  <rdfs:subClassOf rdf:resource="#Base"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BowlPreferredGraspAlignment">
+  <rdfs:subClassOf rdf:resource="#PreferredGraspAlignment"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DefaultPreferredGraspAlignment">
+  <rdfs:subClassOf rdf:resource="#PreferredGraspAlignment"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SpoonPreferredGraspAlignment">
+  <rdfs:subClassOf rdf:resource="#PreferredGraspAlignment"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CerealPreferredGraspAlignment">
+  <rdfs:subClassOf rdf:resource="#PreferredGraspAlignment"/>
+</owl:Class>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#Thing">
+  <owl:equivalentClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity">
+  <owl:equivalentClass rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeIndexedRelation"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#OrderedElement">
+  <owl:equivalentClass rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Singleton"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Color">
+  <owl:equivalentClass rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareInstance">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialAgent"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AnsweringTask">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ArchiveText">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Structured_Text"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FileConfiguration">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Configuration"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Structured_Text">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Text"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Perceiving">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask"/>
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationAcquisition"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommunicationAction">
+  <owl:equivalentClass rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#LocutionaryAction"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Computer_Program">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Structured_Text"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InformationAcquisition">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MentalTask"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExecutableFile">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Digital_File"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExecutableSoftware">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Software"/>
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Collection"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Active">
+  <DUL.:hasPart rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Active"/>
+  <DUL.:isPartOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Active"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Cancelled">
+  <DUL.:hasPart rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Cancelled"/>
+  <DUL.:isPartOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Cancelled"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Failed">
+  <DUL.:hasPart rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Failed"/>
+  <DUL.:isPartOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Failed"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Paused">
+  <DUL.:hasPart rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Paused"/>
+  <DUL.:isPartOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Paused"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Pending">
+  <DUL.:hasPart rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Pending"/>
+  <DUL.:isPartOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Pending"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Succeeded">
+  <DUL.:hasPart rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Succeeded"/>
+  <DUL.:isPartOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Succeeded"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Text">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LocutionaryAction">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+  <owl:equivalentClass rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationAction"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Natural_Language_Text">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Text"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Singleton">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Set"/>
+  <owl:equivalentClass rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderedElement"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PreferenceOrder">
+  <owl:equivalentClass rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PreferenceRegion">
+  <owl:equivalentClass rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryAnsweringTask">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AnsweringTask"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Remembering">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationRetrieval"/>
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Retrospecting"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FailWFNoContinuation">
+  <DUL.:hasPart rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FailWFNoContinuation"/>
+  <DUL.:isPartOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FailWFNoContinuation"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FailWFNondeterministicContinuation">
+  <DUL.:hasPart rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FailWFNondeterministicContinuation"/>
+  <DUL.:isPartOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FailWFNondeterministicContinuation"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FailWFUninterpretableTask">
+  <DUL.:hasPart rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FailWFUninterpretableTask"/>
+  <DUL.:isPartOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FailWFUninterpretableTask"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RDFType">
+  <DUL.:hasPart rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RDFType"/>
+  <DUL.:isPartOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RDFType"/>
+  <DUL.:coparticipatesWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RDFType"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#ObjectAggregate">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#WorkflowExecution">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PlanExecution"/>
+</rdf:Description>
+
+
+</rdf:RDF>
