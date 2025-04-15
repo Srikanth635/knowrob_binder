@@ -1,6 +1,6 @@
 from knowrob import *
 import requests
-
+from owl_mapper import *
 
 class ADReasoner(RDFGoalReasoner):
 	def __init__(self):
@@ -30,6 +30,25 @@ class ADReasoner(RDFGoalReasoner):
 		# Invoke the LLM
 		llm_response = self._query_llm(nl_input)
 
+		logError(f"LLM response: {llm_response}")
+
+		example_designator = """
+		    (an action
+		        (type cutting)
+		        (object (an object
+		                  (type apple)
+		                  (name "apple")
+		                  (properties (size "medium")
+		                              (texture "smooth")
+		                              (color "red")))))
+		    """
+
+		action_inst, participants = process_designator_string(designator_string=example_designator)
+		if action_inst:
+			print(f"\nFunction returned action instance: {action_inst.name}")
+		if participants:
+			print(f"Function returned participant instances: {[p.name for p in participants.values()]}")
+
 		if not llm_response:
 			logError("Failed to get response from LLM")
 			return False
@@ -39,6 +58,7 @@ class ADReasoner(RDFGoalReasoner):
 
 		bindings = Bindings({output_var: String(llm_response)})
 		goal.push(bindings)
+
 		# self.storage().query(goal, goal.push)
 
 		return True

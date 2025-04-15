@@ -1,0 +1,46 @@
+CONCEPT_MAP = {
+    "mug": "DesignedContainer",
+    "cup": "DesignedContainer",
+    "bottle": "DesignedContainer",
+    "container": "DesignedContainer",
+    "counter": "DesignedArtifact", # Assuming CounterTop exists - VERIFY in your SOMA
+    "table": "DesignedArtifact",       # Assuming Table exists - VERIFY in your SOMA
+    "kitchen": "PhysicalPlace",   # VERIFY class name
+    "region": "Region",
+    "human": "Human",
+	"knife":"DesignedTool", # VERIFY class name
+	"blade":"DesignedTool", # VERIFY class name (or handle as part)
+    # === User Request: Map apple to DesignedArtifact ===
+    "apple": "DesignedArtifact", # !!! WARNING: Verify DesignedArtifact exists and is appropriate for food items in your SOMA version !!!
+	"mango":"DesignedArtifact",  # !!! WARNING: Same verification needed !!!
+    # Add more mappings as needed for non-action entities
+}
+
+# 2. For Action Types
+#    Maps designator action types (lowercase) to the SOMA Class used for *classification*
+ACTION_CLASSIFIER_MAP = {
+    "cutting": "Cutting", # VERIFY 'Cutting' is the correct SOMA class name
+    "pickup": "PickingUp", # Example: VERIFY SOMA name for picking up
+    "place": "Placing",   # Example: VERIFY SOMA name for placing
+    "move": "Moving",     # Example: VERIFY SOMA name for moving
+    # Add mappings for action types you use
+}
+#    Defines the base SOMA class for creating the action *instance* itself
+#    (Could also be a map if different actions need different base classes)
+DEFAULT_ACTION_BASE_CLASS = "PhysicalAction" # From user screenshot - VERIFY this class exists in SOMA
+
+# 3. For Properties (used in parse_entity_description and now potentially parse_action_designator)
+PROPERTY_MAP = {
+    "color": "hasColor",
+    "shape": "hasShape",
+    "material": "hasMaterial",
+    "name": "hasName",
+    "at": "hasLocation",
+    "on": "hasLocation",
+    "in": "hasLocation",
+    "destination": "hasRegion", # Check if correct property for motion destinations
+    "target": "isManipulationTarget", # Check if correct property/usage
+    "participant": "hasParticipant", # Make sure 'hasParticipant' is explicitly listed if needed elsewhere
+    "tool": "usesTool", # Example: If you have a 'tool' role, map it to 'usesTool' or 'hasParticipant'
+    # Add more mappings
+}
