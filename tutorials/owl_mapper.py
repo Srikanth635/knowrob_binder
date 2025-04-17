@@ -227,7 +227,8 @@ def parse_action_designator_two_pass(designator, ontologies):
         if isinstance(element, (list, tuple)) and len(element) >= 2:
             key = element[0]; content = element[1]
             if key == 'type' and isinstance(content, str):
-                action_type_name = content; action_type_lower = action_type_name.lower()
+                action_type_name = content
+                action_type_lower = action_type_name.lower()
                 classifier_class_name = ACTION_CLASSIFIER_MAP.get(action_type_lower)
                 if not classifier_class_name: print(f"*** Error: No classifier mapping for '{action_type_name}'."); continue
                 instance_name = generate_instance_name(action_type_lower, None)

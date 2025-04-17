@@ -9167,14 +9167,14 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
   </owl:annotatedTarget>
   <owl:annotatedSource>
     <owl:Restriction>
+      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+      <owl:onProperty rdf:resource="#hasTerminalSituation"/>
       <rdfs:subClassOf>
         <owl:Restriction>
           <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
       </rdfs:subClassOf>
-      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-      <owl:onProperty rdf:resource="#hasTerminalSituation"/>
     </owl:Restriction>
   </owl:annotatedSource>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">If a transition has a terminal situation then it also has a manifestation.</rdfs:comment>
@@ -9190,14 +9190,14 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
   </owl:annotatedTarget>
   <owl:annotatedSource>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasInitialSituation"/>
+      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
       <rdfs:subClassOf>
         <owl:Restriction>
           <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
       </rdfs:subClassOf>
-      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+      <owl:onProperty rdf:resource="#hasInitialSituation"/>
     </owl:Restriction>
   </owl:annotatedSource>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">If a transition has an initial situation then it also has a manifestation.</rdfs:comment>
@@ -9213,6 +9213,12 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
   </owl:annotatedTarget>
   <owl:annotatedSource>
     <owl:Class>
+      <rdfs:subClassOf>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
+          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        </owl:Restriction>
+      </rdfs:subClassOf>
       <owl:intersectionOf rdf:parseType="Collection">
         <rdf:Description rdf:about="#SituationTransition"/>
         <owl:Restriction>
@@ -9220,12 +9226,6 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
           <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
         </owl:Restriction>
       </owl:intersectionOf>
-      <rdfs:subClassOf>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
-          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        </owl:Restriction>
-      </rdfs:subClassOf>
     </owl:Class>
   </owl:annotatedSource>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A SituationTransition that manifests in some Event also includes an Action. (NOTE (MP): Typically, the Event manifesting it would be that included Action actually so perhaps we can just require that manifestations of SituationTransitions be Actions?)</rdfs:comment>
@@ -9249,13 +9249,6 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
   </owl:annotatedTarget>
   <owl:annotatedSource>
     <owl:Class>
-      <owl:intersectionOf rdf:parseType="Collection">
-        <rdf:Description rdf:about="#SituationTransition"/>
-        <owl:Restriction>
-          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-          <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
-        </owl:Restriction>
-      </owl:intersectionOf>
       <rdfs:subClassOf>
         <owl:Class>
           <owl:intersectionOf rdf:parseType="Collection">
@@ -9270,6 +9263,13 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
           </owl:intersectionOf>
         </owl:Class>
       </rdfs:subClassOf>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#SituationTransition"/>
+        <owl:Restriction>
+          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+          <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
     </owl:Class>
   </owl:annotatedSource>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">If a SituationTransition manifests in some Event, then it also has an initial Situation and a terminal one.</rdfs:comment>
