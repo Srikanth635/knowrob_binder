@@ -286,13 +286,116 @@ def save_ontology(loaded_ontologies, output_path, file_format):
     # else: print("\nCannot save: No ontologies loaded.") # Optional
 
 
+import owlready2
+
+
+def parse_action_designator_two_pass_json(designator, ontologies):
+	# Validate input
+	if not isinstance(designator, dict) or "action" not in designator:
+		print("Error: Designator must be a dictionary with an 'action' key")
+		return None, None
+	if not ontologies:
+		print("Error: Ontologies not loaded.")
+		return None, None
+
+	action_data = designator["action"]
+	if not isinstance(action_data, dict) or "type" not in action_data:
+		print("Error: Action must have a 'type' field")
+		return None, None
+
+	# Initialize data structures
+	planned_assertions = {'instances': {}, 'links': []}
+	created_instances = {}
+	action_role_id = "__action__"
+
+	# --- Pass 1a: Plan Instances ---
+	# Action
+	action_type_name = action_data.get("type")
+	action_type_lower = action_type_name.lower()
+	classifier_class_name = ACTION_CLASSIFIER_MAP.get(action_type_lower)
+	if not classifier_class_name:
+		print(f"*** Error: No classifier mapping for '{action_type_name}'.")
+		return None, None
+
+	instance_name = generate_instance_name(action_type_lower, None)
+	planned_assertions['instances'][action_role_id] = {
+		'base_class_name': DEFAULT_ACTION_BASE_CLASS,
+		'instance_name': instance_name,
+		'classifier_class_name': classifier_class_name,
+		'properties': {}
+	}
+
+	# Participant entities (object, tool, location)
+	for role_key in ["object", "tool", "location"]:
+		if role_key in action_data:
+			entity_data = action_data[role_key]
+			if not isinstance(entity_data, dict) or "type" not in entity_data:
+				print(f"Warning: Invalid '{role_key}' data. Skipping.")
+				continue
+
+			entity_type = entity_data.get("type")
+			mapped_class_name = CONCEPT_MAP.get(entity_type.lower())
+			if not mapped_class_name:
+				print(f"*** Error: No class mapping for '{entity_type}' (role '{role_key}').")
+				continue
+
+			specific_name = entity_data.get("name")
+			properties = entity_data.get("properties", {})
+			instance_name = generate_instance_name(mapped_class_name, specific_name)
+			planned_assertions['instances'][role_key] = {
+				'base_class_name': mapped_class_name,
+				'instance_name': instance_name,
+				'classifier_class_name': None,
+				'properties': properties
+			}
+
+			# Plan link
+			link_prop = "hasParticipant"
+			planned_assertions['links'].append({
+				'subject_role': action_role_id,
+				'prop_name': link_prop,
+				'object_role': role_key
+			})
+
+	# --- Pass 1b: Create Instances ---
+	if not planned_assertions['instances']:
+		print("Warning: No instances were planned.")
+	else:
+		for role, instance_data in planned_assertions['instances'].items():
+			class_name = instance_data['base_class_name']
+			instance_name = instance_data['instance_name']
+			BaseClass = find_term(class_name, ontologies)
+			if BaseClass and isinstance(BaseClass, owlready2.entity.ThingClass):
+				instance = INSTANCE_NAMESPACE[instance_name]
+				if not instance:
+					try:
+						instance = BaseClass(instance_name, namespace=INSTANCE_NAMESPACE)
+					except Exception as e:
+						print(f"*** Error creating '{instance_name}' ({class_name}): {e}")
+						instance = None
+				if instance:
+					created_instances[role] = instance
+			else:
+				print(f"*** Error: Cannot create for role '{role}'. Class '{class_name}' not found/invalid.")
+
+	# --- Pass 2: Apply Assertions ---
+	if created_instances:
+		apply_assertions(created_instances, planned_assertions, ontologies)
+	else:
+		print("Skipping Pass 2 (Assertions): No instances created.")
+
+	# Prepare return values
+	main_action_instance = created_instances.get(action_role_id)
+	participant_entities = {r: i for r, i in created_instances.items() if r != action_role_id}
+
+	return main_action_instance, participant_entities
 # --- END HELPER FUNCTION DEFINITIONS ---
 
 
 # --- Main Processing Function ---
 
 def process_designator_string(
-    designator_string: str,
+    designator_string: dict,
     soma_owl_path: str = DEFAULT_SOMA_OWL_PATH,
     soma_iri: str = DEFAULT_SOMA_IRI,
     dul_owl_path: Optional[str] = DEFAULT_DUL_OWL_PATH, # Allow None
@@ -348,10 +451,11 @@ def process_designator_string(
             print(f"*** An unexpected error occurred during designator parsing: {e} ***", file=sys.stderr)
 
         # 3. Process Parsed Designator if valid
-        if designator_tuple:
-            print(f"Processing parsed designator tuple: {designator_tuple}")
-            main_action_instance, participant_entities = parse_action_designator_two_pass(
-                designator_tuple, loaded_ontologies
+        # if designator_tuple:
+        if designator_string:
+            print(f"Processing parsed designator tuple: {designator_string}")
+            main_action_instance, participant_entities = parse_action_designator_two_pass_json(
+                designator_string, loaded_ontologies
             )
 
             # 4. Inspection (Optional)
@@ -397,19 +501,46 @@ def process_designator_string(
 # --- Example Usage within __main__ ---
 
 if __name__ == "__main__":
-    pass
-    # # Example designator string to process
-    # example_designator = """
-    # (an action
-    #     (type cutting)
-    #     (object (an object
-    #               (type apple)
-    #               (name "my_cut_apple")
-    #               (properties (size "medium")
-    #                           (texture "smooth")
-    #                           (color "red")))))
-    # """
-	#
+
+    designator_json = {
+		  "action": {
+			"type": "cutting",
+			"object": {
+			  "type": "apple",
+			  "name": "ripe-apple",
+			  "properties": {
+				"size": "medium",
+				"texture": "smooth"
+			  }
+			},
+			"tool": {
+			  "type": "knife",
+			  "name": "cutting-knife",
+			  "properties": {
+				"sharpness": "high",
+				"size": "medium",
+				"material": "steel",
+				"weight": "light",
+				"edge": "smooth"
+			  }
+			},
+			"location": {
+			  "type": "table",
+			  "name": "kitchen-table",
+			  "properties": {
+				"material": "wood",
+				"height": 1.0,
+				"accessibility": "high",
+				"surface-type": "stable"
+			  }
+			}
+		  }
+		}
+
+    # process_designator_string(designator_string=designator_json)
+
+
+
     # # Call the main processing function with the example string
     # # Uses default paths/IRIs defined at the top - MODIFY THOSE DEFAULTS
     # action_inst, participants = process_designator_string(
