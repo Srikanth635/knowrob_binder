@@ -1,7 +1,5 @@
 from knowrob import *
 import requests
-from owl_mapper import *
-from typing import Tuple
 
 class ADReasoner(RDFGoalReasoner):
 	def __init__(self):
@@ -199,8 +197,3 @@ class ADReasoner(RDFGoalReasoner):
 		except Exception as e:
 			logError("LLM query failed: %s" % str(e))
 			return None
-
-
-
-
-
