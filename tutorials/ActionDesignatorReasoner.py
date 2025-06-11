@@ -15,7 +15,7 @@ class ADReasoner(RDFGoalReasoner):
 		self.nlbuild = IRIAtom("http://knowrob.org/kb/nlbuild#nlbuild")
 		self.defineRelation(self.nlbuild)
 
-		self.reasoners = {"nlreasoner", "nlbuild"}
+		self.reasoners = {self.nlreasoner, self.nlbuild}
 
 		self.gen_endpoint = "http://127.0.0.1:8081/generate"
 		self.build_endpoint = "http://127.0.0.1:8081/build"
@@ -24,8 +24,6 @@ class ADReasoner(RDFGoalReasoner):
 		self.basic_designator : dict = {}
 		self.flanagan : str = ""
 		self.frame_net : str = ""
-
-		# self.api_endpoint = "http://127.0.0.1:5000/query"
 
 		self.fn_map = {self.nlreasoner : lambda g: self._evaluate_reasoner(g),
 					   self.nlbuild : lambda g: self._evaluate_build(g)}
@@ -41,10 +39,11 @@ class ADReasoner(RDFGoalReasoner):
 		output_var = literal.objectTerm()  # The variable to bind the output to
 		predicate_term = literal.propertyTerm()
 
-		predicate = str(predicate_term).split(':')[1]
-
-		if isinstance(predicate_term, IRIAtom) and predicate in self.reasoners:
+		if isinstance(predicate_term, IRIAtom) and predicate_term in self.reasoners:
+			logError("CHANGED Default Evaluate")
 			return self.fn_map[predicate_term](goal)
+		else:
+			logError("Default Evaluate")
 
 		logError("literals, got: %s" % literal)
 		logError("predicate, got: %s" % type(predicate_term))
