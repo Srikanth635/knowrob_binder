@@ -27,9 +27,9 @@ RUN apt update && \
         python3-pip \
         python3-setuptools
 
-# Ensure NB_USER has sudo privileges
-RUN usermod -aG sudo ${NB_USER} && \
-    echo "${NB_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+# # Ensure NB_USER has sudo privileges
+# RUN usermod -aG sudo ${NB_USER} && \
+#     echo "${NB_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Install SWI Prolog
 RUN apt-add-repository -y ppa:swi-prolog/stable && \
