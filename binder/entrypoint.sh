@@ -9,8 +9,10 @@ source ${ROS_WS}/devel/setup.bash
 
 # Start MongoDB and save data on working directory
 MONGODB_URL=mongodb://127.0.0.1:27017
+mkdir -p ${PWD}/mongodb/data
 # Store MongoDB data under directory ${HOME}/data/db
-mongod --fork --logpath ${HOME}/mongod.log
+# mongod --fork --logpath ${HOME}/mongod.log
+mongod --fork --logpath ${PWD}/mongodb/mongod.log --dbpath ${PWD}/mongodb/data
 
 # Start Flask application in background
 cd ${HOME}/LLM_Reasoner/src/langchain
