@@ -8,7 +8,7 @@
 
 <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA.owl">
   <owl:imports rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
-  <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2.1.0</owl:versionInfo>
+  <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">current</owl:versionInfo>
 </owl:Ontology>
 
 <owl:ObjectProperty rdf:about="#affects">
@@ -892,6 +892,35 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:comment xml:lang="en">The relation between two Information Objects that have the same meaning, but are formatted differently. E.g., a text written in UTF-8 encodes a text in a natural writing system (letters) and vice versa.</rdfs:comment>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="#executesMotion">
+  <rdfs:subPropertyOf rdf:resource="#isOccurrenceOf"/>
+  <owl:inverseOf rdf:resource="#isExecutedMotionIn"/>
+  <rdfs:domain rdf:resource="#MotionProcess"/>
+  <rdfs:range rdf:resource="#Motion"/>
+  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+  <rdfs:comment xml:lang="en">A relation between an motion process and a motion event type, e.g. 'lifting an object' executes the motion process 'lifting'.</rdfs:comment>
+  <rdfs:label xml:lang="en">executes motion</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#isOccurrenceOf">
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+  <owl:inverseOf rdf:resource="#isOccurringIn"/>
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between an event and an event type, e.g. 'taking the cup from the table' is an occurence of the motion 'approaching'.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is occurence of</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#isExecutedMotionIn">
+  <rdfs:subPropertyOf rdf:resource="#isOccurringIn"/>
+  <rdfs:domain rdf:resource="#Motion"/>
+  <rdfs:range rdf:resource="#MotionProcess"/>
+  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+  <rdfs:comment xml:lang="en">A relation between an motion process and a motion event type, e.g. 'lifting an object' executes the motion process 'lifting'.</rdfs:comment>
+  <rdfs:label xml:lang="en">is executed motion in</rdfs:label>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="#finishedBy">
   <rdfs:subPropertyOf rdf:resource="#coOccurs"/>
   <owl:inverseOf rdf:resource="#finishes"/>
@@ -1231,7 +1260,7 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
   <rdfs:range>
     <owl:Class>
-      <owl:complementOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
+      <owl:complementOf rdf:resource="#NonmanifestedSituation"/>
     </owl:Class>
   </rdfs:range>
   <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
@@ -1780,7 +1809,7 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
   <rdfs:range>
     <owl:Class>
-      <owl:complementOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
+      <owl:complementOf rdf:resource="#NonmanifestedSituation"/>
     </owl:Class>
   </rdfs:range>
   <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
@@ -2041,6 +2070,15 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
 
 <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizes"/>
 
+<owl:ObjectProperty rdf:about="#isOccurringIn">
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between an event and an event type, e.g. 'taking the cup from the table' is an occurence of the motion 'approaching'.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is occurring in</rdfs:label>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="#isExecutorDefinedIn">
   <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
 </owl:ObjectProperty>
@@ -2072,6 +2110,15 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is linked to</rdfs:label>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="#isMotionDescriptionFor">
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+  <rdfs:domain rdf:resource="#MotionDescription"/>
+  <rdfs:range rdf:resource="#Motion"/>
+  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+  <rdfs:comment xml:lang="en">A special relation between a Motion Plan and a Motion, to indicate that the Motion Plan describes a way to achieve the Motion.</rdfs:comment>
+  <rdfs:label xml:lang="en">is motion description for</rdfs:label>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="#isMovedByAgent">
   <rdfs:subPropertyOf rdf:resource="#interactsWith"/>
   <owl:inverseOf rdf:resource="#movesObject"/>
@@ -2089,26 +2136,7 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an agent to an object that the agent causes to move.</rdfs:comment>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#isOccurrenceOf">
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
-  <owl:inverseOf rdf:resource="#isOccurringIn"/>
-  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
-  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between an event and an event type, e.g. 'taking the cup from the table' is an occurence of the motion 'approaching'.</rdfs:comment>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is occurence of</rdfs:label>
-</owl:ObjectProperty>
-
 <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
-
-<owl:ObjectProperty rdf:about="#isOccurringIn">
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
-  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between an event and an event type, e.g. 'taking the cup from the table' is an occurence of the motion 'approaching'.</rdfs:comment>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is occurring in</rdfs:label>
-</owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies">
   <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
@@ -3072,6 +3100,26 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <rdfs:label xml:lang="en">Ordered element</rdfs:label>
 </owl:Class>
 
+<owl:Class rdf:about="#MotionProcess">
+  <rdfs:subClassOf rdf:resource="#PhysicsProcess"/>
+  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+  <rdfs:comment xml:lang="en">A class that classifies motion processes. This class is used to represent any process involving motion, encompassing a wide range of activities such as walking, running, jumping, and any other form of physical movement.</rdfs:comment>
+  <rdfs:label xml:lang="en">Motion process</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#Motion">
+  <rdfs:subClassOf rdf:resource="#ProcessType"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#isExecutedMotionIn"/>
+      <owl:allValuesFrom rdf:resource="#MotionProcess"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An EventType that classifies motion Processes.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Motion type</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Collection"/>
 
 <owl:Class rdf:about="#System">
@@ -3365,7 +3413,7 @@ There is a further, orthogonal distinction made between:
   <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
 </owl:Class>
 
-<owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation">
+<owl:Class rdf:about="#NonmanifestedSituation">
   <owl:equivalentClass>
     <owl:Class>
       <owl:intersectionOf rdf:parseType="Collection">
@@ -3695,6 +3743,13 @@ Another apporach might be to not model this entity at all and only see Execution
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design">
   <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MotionDescription">
+  <rdfs:subClassOf rdf:resource="#ProcessFlow"/>
+  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+  <rdfs:comment xml:lang="en">A Description of a Motion process, e.g. moving the arm into a specific location</rdfs:comment>
+  <rdfs:label xml:lang="en">Motion Description</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Order">
@@ -4612,13 +4667,6 @@ TODO: for the robot workflows we are likely to need at the start, testing equali
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Motion described in terms of how parts of an Agent's body move.
 
 As such, this concept can be applied only to motions involving some PhysicalAgent, or body parts of a PhysicalAgent.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Motion">
-  <rdfs:subClassOf rdf:resource="#ProcessType"/>
-  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An EventType that classifies motion Processes.</rdfs:comment>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Motion type</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Boiling">
@@ -7777,6 +7825,32 @@ One could argue Mental actions are all Physical actions, because anything the Ag
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A task in which the Agent gathers and interprets sensor information about itself.</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#ProcessFlow">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#definesProcess"/>
+      <owl:someValuesFrom rdf:resource="#ProcessType"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A description that structures a Process.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Process flow</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="#PhysicsProcess">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A process involving physical objects and phenomena which does not change the chemical constituency of the affected objects.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Physical process</rdfs:label>
+</owl:Class>
+
 <owl:Class rdf:about="#MovingAway">
   <rdfs:subClassOf rdf:resource="#Locomotion"/>
   <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
@@ -7974,19 +8048,6 @@ In all these cases, the metaphor points to the existence of several regions of q
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Physical state</rdfs:label>
 </owl:Class>
 
-<owl:Class rdf:about="#PhysicsProcess">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A process involving physical objects and phenomena which does not change the chemical constituency of the affected objects.</rdfs:comment>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Physical process</rdfs:label>
-</owl:Class>
-
 <owl:Class rdf:about="#PlacingTheory">
   <rdfs:subClassOf rdf:resource="#ExecutableSchematicTheory"/>
   <rdfs:subClassOf>
@@ -8115,9 +8176,9 @@ Source: https://en.wikipedia.org/wiki/Plug-in_(computing)</rdfs:comment>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-AGENT.owl"/>
-  <rdfs:label xml:lang="en">The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Situations.
+  <rdfs:comment xml:lang="en">The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Situations.
 
-For the complete model, see 'Preference'.</rdfs:label>
+For the complete model, see 'Preference'.</rdfs:comment>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Predilection</rdfs:label>
 </owl:Class>
 
@@ -8149,7 +8210,7 @@ For the complete model, see 'Preference'.</rdfs:label>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-AGENT.owl"/>
-  <rdfs:label xml:lang="en">The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Descriptions of Situations.</rdfs:label>
+  <rdfs:comment xml:lang="en">The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Descriptions of Situations.</rdfs:comment>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Preference order</rdfs:label>
 </owl:Class>
 
@@ -8180,19 +8241,6 @@ For the complete model, see 'Preference'.</rdfs:label>
   <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A sliding joint that slides along an axis, and has a limited range specified by the upper and lower limits.</rdfs:comment>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prismatic joint</rdfs:label>
-</owl:Class>
-
-<owl:Class rdf:about="#ProcessFlow">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#definesProcess"/>
-      <owl:someValuesFrom rdf:resource="#ProcessType"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A description that structures a Process.</rdfs:comment>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Process flow</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Progression">
@@ -9137,7 +9185,7 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
           <owl:intersectionOf rdf:parseType="Collection">
             <owl:Restriction>
               <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition"/>
-              <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
+              <owl:someValuesFrom rdf:resource="#NonmanifestedSituation"/>
             </owl:Restriction>
           </owl:intersectionOf>
         </owl:Class>
@@ -9156,7 +9204,6 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
   </owl:annotatedTarget>
   <owl:annotatedSource>
     <owl:Restriction>
-      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
       <rdfs:subClassOf>
         <owl:Restriction>
           <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
@@ -9164,6 +9211,7 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
         </owl:Restriction>
       </rdfs:subClassOf>
       <owl:onProperty rdf:resource="#hasTerminalSituation"/>
+      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
     </owl:Restriction>
   </owl:annotatedSource>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">If a transition has a terminal situation then it also has a manifestation.</rdfs:comment>
@@ -9179,13 +9227,13 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
   </owl:annotatedTarget>
   <owl:annotatedSource>
     <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasInitialSituation"/>
       <rdfs:subClassOf>
         <owl:Restriction>
           <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
       </rdfs:subClassOf>
-      <owl:onProperty rdf:resource="#hasInitialSituation"/>
       <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
     </owl:Restriction>
   </owl:annotatedSource>
@@ -9238,13 +9286,6 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
   </owl:annotatedTarget>
   <owl:annotatedSource>
     <owl:Class>
-      <owl:intersectionOf rdf:parseType="Collection">
-        <rdf:Description rdf:about="#SituationTransition"/>
-        <owl:Restriction>
-          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-          <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
-        </owl:Restriction>
-      </owl:intersectionOf>
       <rdfs:subClassOf>
         <owl:Class>
           <owl:intersectionOf rdf:parseType="Collection">
@@ -9259,6 +9300,13 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
           </owl:intersectionOf>
         </owl:Class>
       </rdfs:subClassOf>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#SituationTransition"/>
+        <owl:Restriction>
+          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+          <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
     </owl:Class>
   </owl:annotatedSource>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">If a SituationTransition manifests in some Event, then it also has an initial Situation and a terminal one.</rdfs:comment>
@@ -9293,7 +9341,7 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
   <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#range"/>
   <owl:annotatedTarget>
     <owl:Class>
-      <owl:complementOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
+      <owl:complementOf rdf:resource="#NonmanifestedSituation"/>
     </owl:Class>
   </owl:annotatedTarget>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">If something is a terminal situation then it must be a manifested situation (regardless of whether it was expected or not).</rdfs:comment>
@@ -9304,7 +9352,7 @@ Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
   <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#range"/>
   <owl:annotatedTarget>
     <owl:Class>
-      <owl:complementOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
+      <owl:complementOf rdf:resource="#NonmanifestedSituation"/>
     </owl:Class>
   </owl:annotatedTarget>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">If something is an initial situation of some transition, then it must manifest.</rdfs:comment>

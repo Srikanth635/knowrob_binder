@@ -1,0 +1,37 @@
+{
+	"logging": {
+		"console-sink": {"level": "debug"},
+		"file-sink": {"level": "debug"}
+	},
+	"semantic-web": {
+		"prefixes": [
+            {"alias": "soma", "uri": "http://www.ease-crc.org/ont/"},
+            {"alias": "dul", "uri": "http://www.ontologydesignpatterns.org/ont/dul/"},
+            {"alias": "nlquery", "uri": "http://knowrob.org/kb/nlquery"},
+            {"alias": "nlreasoner", "uri": "http://knowrob.org/kb/nlreasoner"},
+            {"alias": "nlbuild", "uri": "http://knowrob.org/kb/nlbuild"}
+		]
+	},
+	"data-sources": [
+      {"path": "tests/owl/SOMA.owl", "format": "rdf-xml"},
+        {"path": "tests/owl/DUL.owl", "format": "rdf-xml"}
+	],
+	"data-backends": [
+		{
+			"type": "MongoDB",
+			"name": "mongodb",
+			"host": "localhost",
+			"port": 27017,
+			"db": "somaads1",
+			"read-only": false
+		}
+	],
+	"reasoner": [
+        {
+            "name": "ADReasoner",
+            "type": "ADReasoner",
+            "module": "/home/malineni/ROS_WS/knowrob/tutorials/ActionDesignatorReasoner.py",
+			"data-backend": "mongodb"
+        }
+    ]
+}
