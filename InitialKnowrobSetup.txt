@@ -1,0 +1,13 @@
+sudo apt update
+
+sudo apt install librdf0 redland-utils
+sudo apt install librdf0-dev
+## Check installation rdfproc --version
+
+sudo apt install raptor2-utils
+sudo apt install libraptor2-0 libraptor2-dev
+## Check installation rapper --version
+
+sudo apt install libfmt-dev
+sudo apt install libeigen3-dev
+sudo apt install libspdlog-dev
