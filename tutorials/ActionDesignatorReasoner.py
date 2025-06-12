@@ -38,19 +38,19 @@ class ADReasoner(RDFGoalReasoner):
 		predicate_term = literal.propertyTerm()
 
 		if isinstance(predicate_term, IRIAtom) and predicate_term in self.reasoners:
-			logError("CHANGED Default Evaluate")
+			# logError("CHANGED Default Evaluate")
 			return self.fn_map[predicate_term](goal)
-		else:
-			logError("Default Evaluate")
+		# else:
+		# 	logError("Default Evaluate")
 
-		logError("literals, got: %s" % literal)
-		logError("predicate, got: %s" % type(predicate_term))
+		# logError("literals, got: %s" % literal)
+		# logError("predicate, got: %s" % type(predicate_term))
 
 		# Ensure the input is a string (IRIAtom or StringTerm)
 		if isinstance(input_term, IRIAtom) or isinstance(input_term, StringTerm):
 			nl_input = str(input_term)
 		else:
-			logError("Input to nlquery must be a string, got: %s" % input_term)
+			# logError("Input to nlquery must be a string, got: %s" % input_term)
 			return False
 
 		logDebug("Processing natural language query: %s" % nl_input)
@@ -96,7 +96,7 @@ class ADReasoner(RDFGoalReasoner):
 		return True
 
 	def _evaluate_reasoner(self, goal: RDFGoal) -> bool:
-		logError("_evaluate_reasoner DEFINED")
+		# logError("_evaluate_reasoner DEFINED")
 		literal = goal.rdfLiterals()[0]
 		input_term = literal.subjectTerm()
 		output_var = literal.objectTerm()
@@ -106,7 +106,7 @@ class ADReasoner(RDFGoalReasoner):
 		if isinstance(input_term, IRIAtom) or isinstance(input_term, StringTerm):
 			nl_input = str(input_term)
 		else:
-			logError("Input to nlquery must be a string, got: %s" % input_term)
+			# logError("Input to nlquery must be a string, got: %s" % input_term)
 			return False
 
 		reason_response_text, reason_response_json = self._reason_designator(nl_input)
@@ -128,10 +128,10 @@ class ADReasoner(RDFGoalReasoner):
 		bindings = Bindings({output_var: String("Models Built")})
 		goal.push(bindings)
 
-		logError("Instruction %s" % self.basic_designator["instruction"])
-		logError("Action Core %s" % self.basic_designator["action_core"])
-		logError("CRAM PLAN %s" % self.basic_designator["cram_plan_response"])
-		logError("ENRICHED ATTRIBUTES %s" % self.basic_designator["enriched_action_core_attributes"])
+		# logError("Instruction %s" % self.basic_designator["instruction"])
+		# logError("Action Core %s" % self.basic_designator["action_core"])
+		# logError("CRAM PLAN %s" % self.basic_designator["cram_plan_response"])
+		# logError("ENRICHED ATTRIBUTES %s" % self.basic_designator["enriched_action_core_attributes"])
 
 		return True
 
@@ -166,8 +166,8 @@ class ADReasoner(RDFGoalReasoner):
 			}
 			response = requests.post(self.build_endpoint, headers=headers, json=payload)
 			response.raise_for_status()  # Raise an exception for bad status codes
-			logError(f"flask response type is {type(response.json())}")
-			logError(f"flask response text type is {type(response.text)}")
+			# logError(f"flask response type is {type(response.json())}")
+			# logError(f"flask response text type is {type(response.text)}")
 			return response.text, response.json()
 
 		except Exception as e:
@@ -190,8 +190,8 @@ class ADReasoner(RDFGoalReasoner):
 			}
 			response = requests.post(self.reason_endpoint, headers=headers, json=payload)
 			response.raise_for_status()  # Raise an exception for bad status codes
-			logError(f"flask response type is {type(response.json())}")
-			logError(f"flask response text type is {type(response.text)}")
+			# logError(f"flask response type is {type(response.json())}")
+			# logError(f"flask response text type is {type(response.text)}")
 			return response.text, response.json()
 
 		except Exception as e:

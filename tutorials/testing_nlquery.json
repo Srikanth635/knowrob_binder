@@ -30,7 +30,7 @@
         {
             "name": "ADReasoner",
             "type": "ADReasoner",
-            "module": "./ActionDesignatorReasoner.py",
+            "module": "tutorials/ActionDesignatorReasoner.py",
 			"data-backend": "mongodb"
         }
     ]
